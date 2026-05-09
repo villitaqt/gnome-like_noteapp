@@ -1,0 +1,110 @@
+:root {
+  /* GNOME Adwaita Light */
+  --window-bg: #fafafa;
+  --editor-bg: #ffffff;
+  --editor-fg: #1c1c1c;
+  --titlebar-bg: #ebebeb;
+  --titlebar-border: #d4d4d4;
+  --tab-bg: transparent;
+  --tab-active-bg: #ffffff;
+  --tab-hover-bg: rgba(0, 0, 0, 0.07);
+  --tab-fg: #5e5c64;
+  --tab-active-fg: #1c1c1c;
+  --text-muted: #9a9996;
+  --accent: #3584e4;
+  --selection-bg: rgba(53, 132, 228, 0.25);
+  --active-line: rgba(0, 0, 0, 0.04);
+  --link-color: #1c71d8;
+  --dirty-dot: #e66100;
+  --gutter-fg: #c0bfbc;
+  --editor-font: 'Source Code Pro', 'Cascadia Code', 'Consolas', 'Fira Code', monospace;
+  --ui-font: 'Cantarell', 'Segoe UI', system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --window-bg: #242424;
+    --editor-bg: #1e1e1e;
+    --editor-fg: #deddda;
+    --titlebar-bg: #2e2e2e;
+    --titlebar-border: #3d3d3d;
+    --tab-active-bg: #1e1e1e;
+    --tab-hover-bg: rgba(255, 255, 255, 0.07);
+    --tab-fg: #9a9996;
+    --tab-active-fg: #deddda;
+    --text-muted: #6e6e6e;
+    --accent: #78aeed;
+    --selection-bg: rgba(120, 174, 237, 0.3);
+    --active-line: rgba(255, 255, 255, 0.04);
+    --link-color: #78aeed;
+    --dirty-dot: #ff7800;
+    --gutter-fg: #4d4d4d;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+  background: var(--window-bg);
+  font-family: var(--ui-font);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background: var(--editor-bg);
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.25);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 128, 128, 0.4);
+}
+
+/* .no-drag kept as hook for future use */
+.no-drag {
+  position: relative;
+}
+
+.toast {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--editor-fg);
+  color: var(--editor-bg);
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 9999;
+  pointer-events: none;
+  white-space: nowrap;
+  animation: toast-in 0.15s ease;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}

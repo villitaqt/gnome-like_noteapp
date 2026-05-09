@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="#3584e4"/>
+  <!-- Paper -->
+  <rect x="120" y="80" width="272" height="352" rx="16" fill="white"/>
+  <!-- Lines on paper -->
+  <rect x="152" y="148" width="208" height="12" rx="6" fill="#d0d0d0"/>
+  <rect x="152" y="184" width="208" height="12" rx="6" fill="#d0d0d0"/>
+  <rect x="152" y="220" width="208" height="12" rx="6" fill="#d0d0d0"/>
+  <rect x="152" y="256" width="160" height="12" rx="6" fill="#d0d0d0"/>
+  <rect x="152" y="292" width="180" height="12" rx="6" fill="#d0d0d0"/>
+  <!-- Pencil -->
+  <g transform="rotate(-45 356 300)">
+    <rect x="330" y="260" width="52" height="120" rx="4" fill="#f5a623"/>
+    <polygon points="330,380 382,380 356,430" fill="#ffcc80"/>
+    <rect x="330" y="260" width="52" height="18" rx="2" fill="#e0e0e0"/>
+    <rect x="330" y="278" width="52" height="8" fill="#c0a080"/>
+  </g>
+</svg>

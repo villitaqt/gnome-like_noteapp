@@ -1,0 +1,99 @@
+.editor-pane {
+  flex: 1;
+  overflow: hidden;
+  background: var(--editor-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-pane .cm-editor {
+  height: 100%;
+  font-family: var(--editor-font);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.editor-pane .cm-editor.cm-focused {
+  outline: none;
+}
+
+.editor-pane .cm-scroller {
+  overflow: auto;
+  font-family: var(--editor-font);
+}
+
+.editor-pane .cm-content {
+  padding: 12px 0;
+  caret-color: var(--accent);
+  min-height: calc(100% - 24px);
+}
+
+.editor-pane .cm-line {
+  padding: 0 20px 0 8px;
+}
+
+.editor-pane .cm-gutters {
+  background: var(--editor-bg);
+  border-right: 1px solid var(--titlebar-border);
+  color: var(--gutter-fg);
+  min-width: 28px;
+}
+
+.editor-pane .cm-gutter {
+  min-width: 28px;
+}
+
+.editor-pane .cm-lineNumbers .cm-gutterElement {
+  padding: 0 6px 0 4px;
+  min-width: 28px;
+}
+
+.editor-pane .cm-activeLineGutter {
+  background: var(--active-line);
+  color: var(--tab-active-fg);
+}
+
+.editor-pane .cm-activeLine {
+  background: var(--active-line);
+}
+
+.editor-pane .cm-selectionBackground {
+  background: var(--selection-bg) !important;
+}
+
+.editor-pane .cm-cursor {
+  border-left-color: var(--accent);
+  border-left-width: 2px;
+}
+
+.editor-pane .cm-focused .cm-cursor {
+  border-left-color: var(--accent);
+}
+
+.editor-pane .cm-matchingBracket {
+  background: rgba(53, 132, 228, 0.15);
+  outline: 1px solid rgba(53, 132, 228, 0.4);
+}
+
+.editor-pane .cm-searchMatch {
+  background: rgba(255, 200, 0, 0.3);
+}
+
+.editor-pane .cm-searchMatch.cm-searchMatch-selected {
+  background: rgba(255, 165, 0, 0.5);
+}
+
+/* Markdown heading styles */
+.editor-pane .cm-header {
+  font-weight: bold;
+}
+
+/* Fold gutter */
+.editor-pane .cm-foldGutter .cm-gutterElement {
+  cursor: pointer;
+}
+
+/* Hide entire gutter when line numbers are toggled off */
+.editor-pane.no-gutter .cm-gutters {
+  display: none;
+}
