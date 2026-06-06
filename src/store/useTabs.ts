@@ -2,7 +2,7 @@ import { useReducer } from 'react';
 import { Tab, TabsState } from '../types';
 
 type Action =
-  | { type: 'NEW_TAB' }
+  | { type: 'NEW_TAB'; content?: string }
   | { type: 'CLOSE_TAB'; id: string }
   | { type: 'ACTIVATE_TAB'; id: string }
   | { type: 'UPDATE_CONTENT'; id: string; content: string }
@@ -25,7 +25,11 @@ function createBlankTab(): Tab {
 function reducer(state: TabsState, action: Action): TabsState {
   switch (action.type) {
     case 'NEW_TAB': {
-      const tab = createBlankTab();
+      const tab = {
+        ...createBlankTab(),
+        content: action.content ?? '',
+        isDirty: !!action.content,
+      };
       return { tabs: [...state.tabs, tab], activeId: tab.id };
     }
 
@@ -33,8 +37,7 @@ function reducer(state: TabsState, action: Action): TabsState {
       const idx = state.tabs.findIndex((t) => t.id === action.id);
       const newTabs = state.tabs.filter((t) => t.id !== action.id);
       if (newTabs.length === 0) {
-        const blank = createBlankTab();
-        return { tabs: [blank], activeId: blank.id };
+        return { tabs: [], activeId: null };
       }
       let newActiveId = state.activeId;
       if (state.activeId === action.id) {

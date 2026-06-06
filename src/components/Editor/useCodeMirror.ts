@@ -40,7 +40,7 @@ import { oneDark } from '@codemirror/theme-one-dark';
 // Light theme: clean Adwaita-inspired
 const lightTheme = EditorView.theme(
   {
-    '&': { color: '#1c1c1c', backgroundColor: 'transparent', height: '100%' },
+    '&': { color: '#1c1c1c', height: '100%' },
     '.cm-scroller': { overflow: 'auto' },
     '.cm-content': { caretColor: '#3584e4' },
     '.cm-cursor, .cm-dropCursor': { borderLeftColor: '#3584e4', borderLeftWidth: '2px' },
@@ -49,10 +49,14 @@ const lightTheme = EditorView.theme(
   { dark: false },
 );
 
-// Dark theme: one-dark + keep full height
+// Dark theme: one-dark + unified monochrome background
 const darkTheme = [
   oneDark,
-  EditorView.theme({ '&': { height: '100%' }, '.cm-scroller': { overflow: 'auto' } }),
+  EditorView.theme({
+    '&': { height: '100%', backgroundColor: '#242424' },
+    '.cm-scroller': { overflow: 'auto' },
+    '.cm-gutters': { backgroundColor: '#242424', borderRight: '1px solid #333333' },
+  }),
 ];
 
 function isDark() {
@@ -154,6 +158,10 @@ export function useCodeMirror(
       state: startState,
       parent: containerRef.current,
     });
+    if (initialContent.length > 0) {
+      view.dispatch({ selection: { anchor: initialContent.length } });
+    }
+    view.focus();
     viewRef.current = view;
 
     // Watch for OS dark/light mode toggle

@@ -5,6 +5,7 @@ import { useTabs } from './store/useTabs';
 import { Titlebar } from './components/Titlebar/Titlebar';
 import { EditorPane } from './components/Editor/EditorPane';
 import { ShortcutsModal } from './components/ShortcutsModal';
+import { EmptyState } from './components/EmptyState';
 import { openFile, saveFile, saveFileAs, fileNameFromPath } from './lib/fileOps';
 import { loadSession, saveSession } from './lib/session';
 import { loadConfig, ensureNotesFolder, nextAutoName, AppConfig } from './lib/appConfig';
@@ -34,10 +35,7 @@ export default function App() {
       }
 
       const paths = await loadSession();
-      if (paths.length === 0) {
-        dispatch({ type: 'NEW_TAB' });
-        return;
-      }
+      if (paths.length === 0) return;
       const restoredTabs = [];
       for (const filePath of paths) {
         try {
@@ -53,9 +51,7 @@ export default function App() {
           // File deleted, skip
         }
       }
-      if (restoredTabs.length === 0) {
-        dispatch({ type: 'NEW_TAB' });
-      } else {
+      if (restoredTabs.length > 0) {
         dispatch({ type: 'RESTORE_SESSION', tabs: restoredTabs, activeId: restoredTabs[0].id });
       }
     }
@@ -187,7 +183,7 @@ export default function App() {
       />
       {toast && <div className="toast">{toast}</div>}
       {showShortcuts && <ShortcutsModal onClose={() => setShowShortcuts(false)} />}
-      {activeTab && (
+      {activeTab ? (
         <EditorPane
           key={activeTab.id}
           tab={activeTab}
@@ -196,6 +192,8 @@ export default function App() {
           }
           showLineNumbers={showLineNumbers}
         />
+      ) : (
+        <EmptyState onStartTyping={(char) => dispatch({ type: 'NEW_TAB', content: char })} />
       )}
     </div>
   );
