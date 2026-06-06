@@ -176,7 +176,7 @@
 }
 
 .titlebar-spacer {
-  flex: 1 0 16px;
+  flex: 0 0 0;
 }
 
 /* Windows-style window controls (right side) */
@@ -257,4 +257,69 @@
 .wm-btn.close .wm-close-x {
   font-size: 14px;
   line-height: 1;
+}
+
+/* Tab rename input */
+.tab-rename-input {
+  background: transparent;
+  border: none;
+  outline: 1px solid var(--accent);
+  border-radius: 3px;
+  font: inherit;
+  color: inherit;
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+  padding: 0 2px;
+}
+
+/* File menu dropdown */
+.file-menu-container {
+  position: relative;
+}
+
+.file-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 200;
+  background: var(--titlebar-bg);
+  border: 1px solid var(--titlebar-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  padding: 4px;
+  min-width: 200px;
+}
+
+.file-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 6px 10px;
+  border: none;
+  background: transparent;
+  color: var(--editor-fg);
+  font-size: 13px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+  gap: 16px;
+  white-space: nowrap;
+}
+
+.file-menu-item:hover {
+  background: var(--tab-hover-bg);
+  color: var(--tab-active-fg);
+}
+
+.file-menu-shortcut {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.file-menu-divider {
+  height: 1px;
+  background: var(--titlebar-border);
+  margin: 4px 0;
 }

@@ -10,11 +10,13 @@ interface Props {
   activeId: string | null;
   onActivate: (id: string) => void;
   onClose: (id: string) => void;
+  onRename: (id: string, title: string) => void;
   onNewTab: () => void;
   onOpen: () => void;
+  onShowShortcuts: () => void;
 }
 
-export function Titlebar({ tabs, activeId, onActivate, onClose, onNewTab, onOpen }: Props) {
+export function Titlebar({ tabs, activeId, onActivate, onClose, onRename, onNewTab, onOpen, onShowShortcuts }: Props) {
   return (
     <div className="titlebar" data-tauri-drag-region>
       <TabBar
@@ -22,8 +24,10 @@ export function Titlebar({ tabs, activeId, onActivate, onClose, onNewTab, onOpen
         activeId={activeId}
         onActivate={onActivate}
         onClose={onClose}
+        onRename={onRename}
         onNewTab={onNewTab}
         onOpen={onOpen}
+        onShowShortcuts={onShowShortcuts}
       />
       <div className="titlebar-spacer" data-tauri-drag-region />
       <WindowControls

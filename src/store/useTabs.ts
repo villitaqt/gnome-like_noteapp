@@ -7,6 +7,7 @@ type Action =
   | { type: 'ACTIVATE_TAB'; id: string }
   | { type: 'UPDATE_CONTENT'; id: string; content: string }
   | { type: 'MARK_SAVED'; id: string; filePath: string; title: string }
+  | { type: 'RENAME_TAB'; id: string; title: string }
   | { type: 'RESTORE_SESSION'; tabs: Tab[]; activeId: string }
   | { type: 'OPEN_FILE_TAB'; filePath: string; content: string; title: string }
   | { type: 'NEXT_TAB' };
@@ -60,6 +61,14 @@ function reducer(state: TabsState, action: Action): TabsState {
           t.id === action.id
             ? { ...t, filePath: action.filePath, title: action.title, isDirty: false }
             : t
+        ),
+      };
+
+    case 'RENAME_TAB':
+      return {
+        ...state,
+        tabs: state.tabs.map((t) =>
+          t.id === action.id ? { ...t, title: action.title } : t
         ),
       };
 

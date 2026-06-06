@@ -119,6 +119,7 @@ export function useCodeMirror(
       doc: initialContent,
       extensions: [
         lineNumsComp.of(showLineNumbers ? [lineNumbers(), highlightActiveLineGutter(), foldGutter()] : []),
+        EditorView.lineWrapping,
         highlightActiveLine(),
         drawSelection(),
         dropCursor(),

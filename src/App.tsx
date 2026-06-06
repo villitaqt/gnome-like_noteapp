@@ -4,6 +4,7 @@ import { readTextFile } from '@tauri-apps/plugin-fs';
 import { useTabs } from './store/useTabs';
 import { Titlebar } from './components/Titlebar/Titlebar';
 import { EditorPane } from './components/Editor/EditorPane';
+import { ShortcutsModal } from './components/ShortcutsModal';
 import { openFile, saveFile, saveFileAs, fileNameFromPath } from './lib/fileOps';
 import { loadSession, saveSession } from './lib/session';
 import { loadConfig, ensureNotesFolder, nextAutoName, AppConfig } from './lib/appConfig';
@@ -11,6 +12,7 @@ import { loadConfig, ensureNotesFolder, nextAutoName, AppConfig } from './lib/ap
 export default function App() {
   const { tabs, activeId, activeTab, dispatch } = useTabs();
   const [showLineNumbers, setShowLineNumbers] = useState(true);
+  const [showShortcuts, setShowShortcuts] = useState(false);
   const [config, setConfig] = useState<AppConfig | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -120,6 +122,10 @@ export default function App() {
     }
   };
 
+  const handleRename = (id: string, title: string) => {
+    dispatch({ type: 'RENAME_TAB', id, title });
+  };
+
   const handleOpen = async () => {
     const result = await openFile();
     if (result) {
@@ -174,10 +180,13 @@ export default function App() {
         activeId={activeId}
         onActivate={(id) => dispatch({ type: 'ACTIVATE_TAB', id })}
         onClose={(id) => dispatch({ type: 'CLOSE_TAB', id })}
+        onRename={handleRename}
         onNewTab={() => dispatch({ type: 'NEW_TAB' })}
         onOpen={handleOpen}
+        onShowShortcuts={() => setShowShortcuts(true)}
       />
       {toast && <div className="toast">{toast}</div>}
+      {showShortcuts && <ShortcutsModal onClose={() => setShowShortcuts(false)} />}
       {activeTab && (
         <EditorPane
           key={activeTab.id}
